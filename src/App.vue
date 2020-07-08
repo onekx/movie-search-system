@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-container>
-      <el-header>
+      <el-header class="no-padding">
         <Header />
       </el-header>
       <el-main>
@@ -24,16 +24,21 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+body {
+  padding: 0;
+  margin: 0;
+  min-width: 1500px;
+}
+
 .el-header {
-  background-color: #b3c0d1;
   color: #333;
   text-align: center;
   line-height: 60px;
+  padding: 0 !important;
 }
 
 .el-main {
-  background-color: #e9eef3;
   color: #333;
   text-align: center;
   line-height: 160px;
