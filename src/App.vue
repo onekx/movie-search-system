@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-container>
-      <el-header class="no-padding">
+      <el-header>
         <Header />
       </el-header>
       <el-main>
