@@ -54,8 +54,14 @@ export default {
         tag: key
       })
     },
-    handleSearch() {
-      console.log(this.search)
+    async handleSearch() {
+      try {
+        const res = await axios.get(`/api//search_subjects?tag=${this.search}`)
+        this.$store.commit('setMovies', res.data.subjects)
+        this.search = ''
+      } catch (err) {
+        console.log(err)
+      }
     },
     updateContent() {
       this.$store.dispatch('getMovies')
