@@ -1,24 +1,13 @@
-# movie-search-system
+# 电影搜索系统
 
-## Project setup
-```
-npm install
-```
+调用豆瓣 API ,使用 vue 构建的电影搜索系统。
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+![样例](demo.png "电影搜索系统")
 
-### Compiles and minifies for production
+## 运行
+```shell
+npm i
 ```
-npm run build
+```shell
+npm start
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
