@@ -2,8 +2,8 @@
   <div>
     <el-row>
       <el-col :span="6" v-for="movie in $store.state.movies" :key="movie.id">
-        <el-image :src="movie.cover" @click="movieDetail" class="image-style"></el-image>
-        <el-button class="text" type="text" @click="movieDetail" v-text="movie.title"></el-button>
+        <el-image :src="movie.cover" @click="movieDetail(movie)" class="image-style"></el-image>
+        <el-button class="text" type="text" @click="movieDetail(movie)" v-text="movie.title"></el-button>
       </el-col>
     </el-row>
   </div>
@@ -21,8 +21,8 @@ export default {
     this.$store.dispatch('getMovies')
   },
   methods: {
-    movieDetail() {
-      alert('ok')
+    movieDetail(movie) {
+      window.location.href = movie.url
     }
   }
 }
