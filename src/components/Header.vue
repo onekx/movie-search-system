@@ -8,22 +8,13 @@
     active-text-color="#ffd04b"
     class="el-menu"
   >
-    <el-menu-item index="hot">热门</el-menu-item>
-    <el-menu-item index="new">最新</el-menu-item>
-    <el-menu-item index="classic">经典</el-menu-item>
-    <el-menu-item index="high">高分</el-menu-item>
-    <el-menu-item index="unpopular">冷门</el-menu-item>
-    <el-menu-item index="china">华语</el-menu-item>
-    <el-menu-item index="occident">欧美</el-menu-item>
-    <el-menu-item index="korea">韩国</el-menu-item>
-    <el-menu-item index="janpan">日本</el-menu-item>
-    <el-menu-item index="action">动作</el-menu-item>
-    <el-menu-item index="comedy">喜剧</el-menu-item>
-    <el-menu-item index="love">爱情</el-menu-item>
-    <el-menu-item index="science">科幻</el-menu-item>
-    <el-menu-item index="suspense">悬疑</el-menu-item>
-    <el-menu-item index="terror">恐怖</el-menu-item>
-    <el-menu-item index="cure">治愈</el-menu-item>
+    <el-menu-item
+      v-for="tag in allTags"
+      :key="tag"
+      :index="tag"
+      v-text="tag"
+      @click="updateContent"
+    ></el-menu-item>
     <el-input
       class="el-input"
       v-model="search"
@@ -37,20 +28,37 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'Header',
   data() {
     return {
-      activeIndex: 'hot',
-      search: ''
+      activeIndex: '热门',
+      search: '',
+      allTags: []
+    }
+  },
+  async created() {
+    try {
+      const { data } = await axios.get('/api/search_tags')
+      this.allTags = data.tags
+    } catch (err) {
+      console.log(err)
     }
   },
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath)
+    handleSelect(key) {
+      this.$store.commit({
+        type: 'updateTag',
+        tag: key
+      })
     },
     handleSearch() {
       console.log(this.search)
+    },
+    updateContent() {
+      this.$store.dispatch('getMovies')
     }
   }
 }

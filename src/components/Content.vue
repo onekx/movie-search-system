@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row>
-      <el-col :span="6" v-for="movie in moviesInfo" :key="movie.id">
+      <el-col :span="6" v-for="movie in $store.state.movies" :key="movie.id">
         <el-image :src="movie.cover" @click="movieDetail" class="image-style"></el-image>
         <el-button class="text" type="text" @click="movieDetail" v-text="movie.title"></el-button>
       </el-col>
@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   name: 'Content',
   data() {
@@ -19,13 +17,8 @@ export default {
       moviesInfo: []
     }
   },
-  async created() {
-    try {
-      const { data } = await axios.get(`/api/search_subjects?tag=热门`)
-      this.moviesInfo = data.subjects
-    } catch (err) {
-      console.log(err)
-    }
+  created() {
+    this.$store.dispatch('getMovies')
   },
   methods: {
     movieDetail() {
